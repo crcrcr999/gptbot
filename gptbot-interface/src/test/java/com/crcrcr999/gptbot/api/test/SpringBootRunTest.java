@@ -1,6 +1,7 @@
 package com.crcrcr999.gptbot.api.test;
 
 import com.alibaba.fastjson.JSON;
+import com.crcrcr999.gptbot.api.domain.ai.IOpenAI;
 import com.crcrcr999.gptbot.api.domain.zsxq.IZsxqApi;
 import com.crcrcr999.gptbot.api.domain.zsxq.model.aggregates.CommentsAggregates;
 import com.crcrcr999.gptbot.api.domain.zsxq.model.vo.Topics;
@@ -34,21 +35,29 @@ public class SpringBootRunTest {
     @Resource
     private IZsxqApi zsxqApi;
 
+    @Resource
+    private IOpenAI openai;
+
     @Test
     public void test_zsxqApi() throws IOException {
-       CommentsAggregates ca =  zsxqApi.queryComment(groupId,cookie);
+        CommentsAggregates ca = zsxqApi.queryComment(groupId, cookie);
 //       logger.info("测试结果{}", JSON.toJSONString(ca));
-       if(ca.getSucceeded()) {
-           List<Topics> topics = ca.getResp_data().getTopics();
-           for (Topics topic : topics) {
-               String topicId = topic.getTopic_id();
-               String text = topic.getTalk().getText();
-               String name = topic.getTalk().getOwner().getName();
-               logger.info("评论id：{},评论内容:{},评论发布者：{}", topicId, text, name);
-               if(name.equals("耳东水闰")&&topic.getShow_comments()==null){
-                    zsxqApi.answer(topicId,"测试",cookie);
-               }
-           }
-       }
+        if (ca.getSucceeded()) {
+            List<Topics> topics = ca.getResp_data().getTopics();
+            for (Topics topic : topics) {
+                String topicId = topic.getTopic_id();
+                String text = topic.getTalk().getText();
+                String name = topic.getTalk().getOwner().getName();
+                logger.info("评论id：{},评论内容:{},评论发布者：{}", topicId, text, name);
+                if (name.equals("耳东水闰") && topic.getShow_comments() == null) {
+                    zsxqApi.answer(topicId, "测试", cookie);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void test_chat() throws IOException {
+        openai.doChatGPT("xxx", "你好");
     }
 }
