@@ -1,6 +1,5 @@
 package com.crcrcr999.gptbot.api.test;
 
-import com.alibaba.fastjson.JSON;
 import com.crcrcr999.gptbot.api.domain.ai.IOpenAI;
 import com.crcrcr999.gptbot.api.domain.zsxq.IZsxqApi;
 import com.crcrcr999.gptbot.api.domain.zsxq.model.aggregates.CommentsAggregates;
@@ -58,6 +57,6 @@ public class SpringBootRunTest {
 
     @Test
     public void test_chat() throws IOException {
-        openai.doChatGPT("xxx", "你好");
+        openai.doChatGPT("xxx", "你好", "gpt-4-turbo", "你是一个专业的个人助理,旨在回答一切问题");
     }
 }

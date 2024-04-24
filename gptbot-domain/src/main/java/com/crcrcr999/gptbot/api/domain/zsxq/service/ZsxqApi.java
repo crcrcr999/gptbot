@@ -41,7 +41,7 @@ public class ZsxqApi implements IZsxqApi {
         CloseableHttpResponse response = httpClient.execute(get);
         if(response.getStatusLine().getStatusCode()== HttpStatus.SC_OK){
             String jsonstr = EntityUtils.toString(response.getEntity());
-            logger.info("拉取数据，groupId={},jsonstr={}",groupId,jsonstr);
+//            logger.info("拉取数据，groupId={},jsonstr={}",groupId,jsonstr);
             return JSON.parseObject(jsonstr,CommentsAggregates.class);
         }else{
             throw new RuntimeException("queryComments Err code is "+response.getStatusLine().getStatusCode());

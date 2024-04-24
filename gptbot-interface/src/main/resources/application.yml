@@ -1,7 +1,17 @@
 server:
   port: 8090
+# 分组任务配置
 gptbot:
-  groupId: 28885518425541
-  cookie: xxx
-  commentname: 耳东水闰
-  apikey: xxx
+  launchList: group01 # 启动几组，就配置几组
+  group01:
+    groupName: ChatGPT AI 问答助手
+    groupId: 28885518425541 # 知识星球ID
+    cookie:  # 知识星球个人cookie信息
+    #根据名称过滤评论 可选
+    commentname:
+    apikey:  # 自行申请 https://beta.openai.com/overview 或者联系小傅哥 fustack 付费申请【购买虚拟号码等需要支付】。
+    cronExpression: 0/30 * * * * ? # 执行的频次配置，参考：cron.qqe2.com
+    # gpt的预设性格
+    prompt: 你是一个专业的个人助理,旨在回答一切问题,回答问题时使用提问所采用的语言。
+    #gpt版本
+    gptversion: gpt-4-turbo

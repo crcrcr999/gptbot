@@ -8,5 +8,5 @@ import java.io.IOException;
  * @Description：chatgpt api接口
  */
 public interface IOpenAI {
-    String doChatGPT(String openAiKey, String question) throws IOException;
+    String doChatGPT(String openAiKey, String question, String version, String prompt) throws IOException;
 }

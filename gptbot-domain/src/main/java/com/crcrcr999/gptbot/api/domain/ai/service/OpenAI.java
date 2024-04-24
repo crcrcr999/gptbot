@@ -30,7 +30,7 @@ public class OpenAI implements IOpenAI {
     private Logger logger = LoggerFactory.getLogger(OpenAI.class);
 
     @Override
-    public String doChatGPT(String openAiKey, String question) throws IOException {
+    public String doChatGPT(String openAiKey, String question, String version, String prompt) throws IOException {
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         // 代理地址；open.aiproxy.xyz、open2.aiproxy.xyz
@@ -39,11 +39,11 @@ public class OpenAI implements IOpenAI {
         post.addHeader("Authorization", "Bearer " + openAiKey);
 
         String paramJson = "{\n" +
-                "    \"model\": \"gpt-3.5-turbo\",\n" +
+                "    \"model\": \"" + version + "\",\n" +
                 "    \"messages\": [\n" +
                 "      {\n" +
                 "        \"role\": \"system\",\n" +
-                "        \"content\": \"You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.\"\n" +
+                "        \"content\": \"" + prompt + "\"\n" +
                 "      },\n" +
                 "      {\n" +
                 "        \"role\": \"user\",\n" +
