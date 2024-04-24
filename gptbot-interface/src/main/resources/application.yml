@@ -9,7 +9,7 @@ gptbot:
     cookie:  # 知识星球个人cookie信息
     #根据名称过滤评论 可选
     commentname:
-    apikey:  # 自行申请 https://beta.openai.com/overview 或者联系小傅哥 fustack 付费申请【购买虚拟号码等需要支付】。
+    apikey:  # 自行申请 https://beta.openai.com/overview
     cronExpression: 0/30 * * * * ? # 执行的频次配置，参考：cron.qqe2.com
     # gpt的预设性格
     prompt: 你是一个专业的个人助理,旨在回答一切问题,回答问题时使用提问所采用的语言。

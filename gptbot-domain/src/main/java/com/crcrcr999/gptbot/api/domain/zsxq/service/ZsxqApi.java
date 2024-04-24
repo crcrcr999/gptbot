@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @Author:水门土一
@@ -61,10 +62,11 @@ public class ZsxqApi implements IZsxqApi {
         StringEntity json = new StringEntity(jsonString, ContentType.create("text/json","UTF-8"));
         post.setEntity(json);
         CloseableHttpResponse response = httpClient.execute(post);
-        if(response.getStatusLine().getStatusCode()== HttpStatus.SC_OK){
-            String jsonStr = EntityUtils.toString(response.getEntity());
-            logger.info("评论结果，topicid={},jsonstr={}",topicId,jsonStr);
-            CommentRes commentRes = JSON.parseObject(jsonStr,CommentRes.class);
+        if(response.getStatusLine().getStatusCode()== HttpStatus.SC_OK) {
+            String jsonStr = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+            JSONObject jsonObject = JSONObject.fromObject(jsonStr);
+            logger.info("评论结果，topicid={},jsonstr={}", topicId, jsonObject.toString());
+            CommentRes commentRes = JSON.parseObject(jsonStr, CommentRes.class);
             return commentRes.isSucceeded();
         }else{
             throw new RuntimeException("comment err code is "+response.getStatusLine().getStatusCode());

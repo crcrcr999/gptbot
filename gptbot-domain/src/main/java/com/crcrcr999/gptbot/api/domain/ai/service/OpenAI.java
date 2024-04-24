@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class OpenAI implements IOpenAI {
 
         CloseableHttpResponse response = httpClient.execute(post);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            String jsonStr = EntityUtils.toString(response.getEntity());
+            String jsonStr = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
             AIAnswer aiAnswer = JSON.parseObject(jsonStr, AIAnswer.class);
             StringBuilder answers = new StringBuilder();
             List<Choices> choices = aiAnswer.getChoices();
